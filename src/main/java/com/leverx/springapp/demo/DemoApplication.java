@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-@PropertySource("classpath:application.properties")
 public class DemoApplication {
     @Value("${keyword.first}")
     private String keywordOne;
