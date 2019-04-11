@@ -10,16 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-@PropertySource("classpath:application.properties")
 public class DemoApplication {
     @Value("${keyword.first}")
-    private String KEYWORD_ONE;
+    private String keywordOne;
     @Value("${keyword.second}")
-    private String KEYWORD_TWO;
+    private String keywordTwo;
 
     @RequestMapping("/")
     public String home(){
-      return KEYWORD_ONE+KEYWORD_TWO;
+      return keywordOne+keywordTwo;
     }
 
     public static void main(String[] args) {
