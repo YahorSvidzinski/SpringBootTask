@@ -5,7 +5,6 @@
 ```
 docker build -t [IMAGE_NAME] .
 ```
-where temp is name of your image 
 
 ## Run container
 
