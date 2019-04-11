@@ -1,10 +1,16 @@
 # TASK1
-To run project type
 
-docker build -t myorg/myapp .
+##Build image 
+```
+docker build -t temp .
+```
+where temp is name of your image 
 
-then
+##Run container
+```
+docker run -p 8080:8080 -e KEYWORD_ONE=HELLO -e KEYWORD_TWO=SERGEY temp
+```
 
-docker run -p 8080:8080 myorg/myapp
+
 
 
