@@ -11,7 +11,7 @@
     </parent>
     <groupId>com.leverx.springapp</groupId>
     <artifactId>spring-app</artifactId>
-    <version>0.0.1</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
     <name>Task1</name>
     <description>Spring Boot app with Dockerfile</description>
