@@ -13,7 +13,7 @@ public class DemoApplication {
     private String keywordOne;
 
     @Value("${keyword.second}")
-      private String keywordTwo;
+    private String keywordTwo;
 
     @RequestMapping("/")
     public String home() { 
