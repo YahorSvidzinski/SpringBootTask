@@ -16,7 +16,7 @@ public class DemoApplication {
     private String keywordTwo;
 
     @RequestMapping("/")
-    public String home() { 
+    public String home() {
         return keywordOne + keywordTwo;
     }
 
