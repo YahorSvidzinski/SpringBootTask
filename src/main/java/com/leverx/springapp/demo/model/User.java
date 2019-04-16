@@ -1,6 +1,5 @@
 package com.leverx.springapp.demo.model;
 
-import com.leverx.springapp.demo.config.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,19 +20,20 @@ import java.io.Serializable;
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
-
+    public static final int MAX_STRING_NAME_LENGTH = 40;
+    public static final int MIN_STRING_NAME_LENGTH = 2;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
 
     @NotNull
-    @Size(min = Constants.MIN_STRING_LENGTH, max = Constants.MAX_STRING_LENGTH)
+    @Size(min = MIN_STRING_NAME_LENGTH, max = MAX_STRING_NAME_LENGTH)
     @Column(name = "first_name")
     private String firstName;
 
     @NotNull
-    @Size(min = Constants.MIN_STRING_LENGTH, max = Constants.MAX_STRING_LENGTH)
+    @Size(min = MIN_STRING_NAME_LENGTH, max = MAX_STRING_NAME_LENGTH)
     @Column(name = "second_name")
     private String secondName;
 }

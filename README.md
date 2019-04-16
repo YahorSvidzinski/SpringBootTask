@@ -1,4 +1,4 @@
-# TASK1
+# TASK2
 
 ## Build image 
 
@@ -6,20 +6,30 @@
 docker build -t [IMAGE_NAME] .
 ```
 
-## Run container
+## Run docker compose
 
 ```
-docker run -p 8080:8080 -e KEYWORD_ONE=[FIRST_VARIABLE] -e KEYWORD_TWO=[SECOND_VARIABLE] [IMAGE_NAME]
+docker-compose run --service-ports -e POSTGRES_PASSWORD=[Your postgres pass] -e POSTGRES_USER=[Your postgres user] web
 ```
-
-## Expected result
-Go to localhost:8080.
-You must see
+There is default name of your database :"postgres"
+####Go to localhost:8080/actuator/health
+#####You must see
 ```
-[FIRST_VARIALE][SECOND_VARIABLE]
+{"status":"UP"}
 ```
-
-
+###To add user send POST request to 
+http://localhost:8080/users
+##with JSON
+ ```
+ {
+     "firstName": "[userFirstName]",
+     "secondName": "[userSecondName]"
+ }
+ ```
+###To get user by id send GET request to 
+http://localhost:8080/users/{id}
+###To get all users send GET request to
+http://localhost:8080/users
 
 
 

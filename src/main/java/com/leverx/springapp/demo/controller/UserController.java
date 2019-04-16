@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import javax.validation.Valid;
+import java.net.URI;
 
 @RestController
 @RequestMapping("/users")
@@ -21,16 +25,13 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping("")
-    public ResponseEntity createUser(@RequestBody User user) {
-        /*if (user.getFirstName().length() < Constants.MIN_STRING_LENGTH
-                && user.getSecondName().length() < Constants.MIN_STRING_LENGTH
-                && user.getFirstName().length() > Constants.MAX_STRING_LENGTH
-                && user.getSecondName().length() > Constants.MAX_STRING_LENGTH) {
-            return new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
-        }*/
+    @PostMapping
+    public ResponseEntity createUser(@Valid @RequestBody User user) {
         userRepository.save(user);
-        return new ResponseEntity(HttpStatus.CREATED);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest().path("/{id}")
+                .buildAndExpand(user.getId()).toUri();
+        return ResponseEntity.created(location).build();
     }
 
     @GetMapping("/{id}")
@@ -41,7 +42,7 @@ public class UserController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity getAll() {
         if (userRepository.findAll().isEmpty()) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
