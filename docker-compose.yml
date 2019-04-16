@@ -1,0 +1,26 @@
+version: '2'
+services:
+  web:
+    image: 'dasss'
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_URL=jdbc:postgresql://db:5432/postgres
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    ports:
+      - 5432:5432
+
+
+
+
+
+
+
