@@ -3,7 +3,7 @@
 ## Build image 
 
 ```
-docker build -t [IMAGE_NAME] .
+docker build -t myimage .
 ```
 
 ## Run docker compose
