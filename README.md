@@ -17,18 +17,18 @@ There is default name of your database :"postgres"
 ```
 {"status":"UP"}
 ```
-###To add user send POST request to 
+### To add user send POST request to 
 http://localhost:8080/users
-##with JSON
+## with JSON
  ```
  {
      "firstName": "[userFirstName]",
      "secondName": "[userSecondName]"
  }
  ```
-###To get user by id send GET request to 
+### To get user by id send GET request to 
 http://localhost:8080/users/{id}
-###To get all users send GET request to
+### To get all users send GET request to
 http://localhost:8080/users
 
 
