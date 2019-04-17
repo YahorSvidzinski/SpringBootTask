@@ -3,13 +3,13 @@
 ## Build image 
 
 ```
-docker build -t myimage .
+docker build -t webserviceimage .
 ```
 
 ## Run docker compose
 
 ```
-docker-compose run --service-ports -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_URL=jdbc:postgresql://db:5432/postgres web
+docker-compose run --service-ports -e POSTGRES_PASSWORD=[POSTGRES_PASSWORD] -e POSTGRES_USER=[POSTGRES_USER] -e POSTGRES_URL=jdbc:postgresql://db:5432/postgres web
 ```
 There is default name of your database :"postgres"
 ####GET  

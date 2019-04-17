@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Table;
@@ -27,11 +26,9 @@ public class User {
 
     @NotNull
     @Size(min = MIN_NAME_LENGTH, max = MAX_NAME_LENGTH)
-    @Column
     private String firstName;
 
     @NotNull
     @Size(min = MIN_NAME_LENGTH, max = MAX_NAME_LENGTH)
-    @Column
     private String secondName;
 }

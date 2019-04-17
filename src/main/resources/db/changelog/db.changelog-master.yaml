@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: firstChangeSet
+      id: usersTable
       author: Yahor Svidzinski
       changes:
         - createTable:
