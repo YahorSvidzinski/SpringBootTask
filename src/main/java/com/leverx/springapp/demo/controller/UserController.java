@@ -25,7 +25,7 @@ import java.util.Optional;
 public class UserController {
 
     private final UserRepository userRepository;
- 
+
     @PostMapping
     public ResponseEntity<?> createUser(@Valid @RequestBody User user) {
         URI location = ServletUriComponentsBuilder

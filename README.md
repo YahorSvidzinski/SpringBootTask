@@ -9,7 +9,7 @@ docker build -t myimage .
 ## Run docker compose
 
 ```
-docker-compose run --service-ports -e POSTGRES_PASSWORD=[Your postgres pass] -e POSTGRES_USER=[Your postgres user] web
+docker-compose run --service-ports -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_URL=jdbc:postgresql://db:5432/postgres web
 ```
 There is default name of your database :"postgres"
 ####GET  
