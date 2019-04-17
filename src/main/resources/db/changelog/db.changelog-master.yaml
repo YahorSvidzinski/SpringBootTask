@@ -1,14 +1,14 @@
 databaseChangeLog:
   - changeSet:
-      id: 1
-      author: yahor
+      id: firstChangeSet
+      author: Yahor Svidzinski
       changes:
         - createTable:
             tableName: users
             columns:
               - column:
                   name: id
-                  type: int
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true

@@ -1,26 +1,19 @@
-version: '2'
+version: '3'
 services:
   web:
-    image: "myimage"
+    image: "webserviceimage"
     ports:
       - 8080:8080
     depends_on:
       - db
     environment:
-      - POSTGRES_ENV_PASSWORD=POSTGRES_PASSWORD
-      - POSTGRES_ENV_USER=POSTGRES_USER
-      - POSTGRES_URL=jdbc:postgresql://db:5432/postgres
+      POSTGRES_URL:
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
   db:
     image: postgres
     environment:
-      - POSTGRES_PASSWORD
-      - POSTGRES_USER
+      POSTGRES_PASSWORD:
+      POSTGRES_USER:
     ports:
       - 5432:5432
-
-
-
-
-
-
-

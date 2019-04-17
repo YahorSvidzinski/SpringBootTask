@@ -2,7 +2,9 @@ package com.leverx.springapp.demo.controller;
 
 import com.leverx.springapp.demo.model.User;
 import com.leverx.springapp.demo.repository.UserRepository;
-import org.springframework.http.HttpStatus;
+import lombok.RequiredArgsConstructor;
+import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,39 +16,42 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
+@RequiredArgsConstructor
 public class UserController {
 
-    private UserRepository userRepository;
-
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
+    private final UserRepository userRepository;
+ 
     @PostMapping
-    public ResponseEntity createUser(@Valid @RequestBody User user) {
-        userRepository.save(user);
+    public ResponseEntity<?> createUser(@Valid @RequestBody User user) {
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}")
                 .buildAndExpand(user.getId()).toUri();
+        userRepository.save(user);
         return ResponseEntity.created(location).build();
+        //I want to stay with ResponseEntity to use builder
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity get(@PathVariable("id") Long id) {
-        if (userRepository.findById(id).isPresent()) {
-            return new ResponseEntity<Object>(userRepository.findById(id), HttpStatus.OK);
+    public ResponseEntity<?> get(@PathVariable("id") Long id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            return new ResponseEntity<Optional<User>>(user, OK);
         }
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return new ResponseEntity(NOT_FOUND);
     }
 
     @GetMapping
-    public ResponseEntity getAll() {
-        if (userRepository.findAll().isEmpty()) {
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
+    public ResponseEntity<?> getAll() {
+        Optional<List<User>> users = Optional.ofNullable(userRepository.findAll());
+         if (users.isPresent()) {
+             return new ResponseEntity<Optional<List<User>>>(users, OK);
+        } else {
+             return new ResponseEntity(NOT_FOUND);
         }
-        return new ResponseEntity<Object>(userRepository.findAll(), HttpStatus.OK);
     }
 }
