@@ -42,5 +42,5 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<User>> getAll() {
         return ResponseEntity.of(Optional.ofNullable(userRepository.findAll()));
-        }
+    }
 }

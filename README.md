@@ -1,35 +1,35 @@
 # TASK2
 
-## Build image 
+#### Build image 
 
 ```
 docker build -t webserviceimage .
 ```
 
-## Run docker compose
+#### Run docker compose
 
 ```
 docker-compose run --service-ports -e POSTGRES_PASSWORD=[POSTGRES_PASSWORD] -e POSTGRES_USER=[POSTGRES_USER] -e POSTGRES_URL=jdbc:postgresql://db:5432/postgres web
 ```
 There is default name of your database :"postgres"
-####GET  
+#### Request
 http://localhost:8080/actuator/health
-#####You must see
+#### You must see
 ```
 {"status":"UP"}
 ```
-### To add user send POST request to 
+#### To add user send request to 
 http://localhost:8080/users
-## 
+####
  ```
  {
      "firstName": "[userFirstName]",
      "secondName": "[userSecondName]"
  }
  ```
-### To get user by id send GET request to 
+#### To get user by id send request to 
 http://localhost:8080/users/{id}
-### To get all users send GET request to
+### To get all users send request to
 http://localhost:8080/users
 
 
