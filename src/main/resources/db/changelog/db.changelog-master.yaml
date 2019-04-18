@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: usersTable
+      author: Yahor Svidzinski
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(40)
+                  constraints: false
+              - column:
+                  name: second_name
+                  type: varchar(40)
+                  constraints:
+                    nullable: false
+
