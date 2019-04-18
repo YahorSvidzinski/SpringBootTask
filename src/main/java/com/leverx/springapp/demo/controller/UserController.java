@@ -16,7 +16,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -38,9 +37,9 @@ public class UserController {
     public ResponseEntity<User> get(@PathVariable("id") Long id) {
         return ResponseEntity.of(userRepository.findById(id));
     }
-    
+
     @GetMapping
     public ResponseEntity<List<User>> getAll() {
-        return ResponseEntity.of(Optional.ofNullable(userRepository.findAll()));
+        return ResponseEntity.ok(userRepository.findAll());
     }
 }
