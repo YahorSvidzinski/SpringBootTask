@@ -5,6 +5,8 @@ import com.leverx.springapp.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,11 +21,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
+@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
 public class UserController {
 
     private final UserRepository userRepository;
 
     @PostMapping
+    @Transactional
     public ResponseEntity<Void> create(@Valid @RequestBody User user) {
         userRepository.save(user);
         var location = ServletUriComponentsBuilder
