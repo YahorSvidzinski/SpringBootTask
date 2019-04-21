@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -27,7 +26,7 @@ public class UserController {
     @PostMapping
     public ResponseEntity<Void> create(@Valid @RequestBody User user) {
         userRepository.save(user);
-        URI location = ServletUriComponentsBuilder
+        var location = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}")
                 .buildAndExpand(user.getId()).toUri();
         return ResponseEntity.created(location).build();

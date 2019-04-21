@@ -20,6 +20,7 @@ import javax.validation.constraints.Size;
 public class User {
     public static final int MAX_NAME_LENGTH = 40;
     public static final int MIN_NAME_LENGTH = 2;
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
