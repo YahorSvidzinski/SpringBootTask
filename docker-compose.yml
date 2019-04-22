@@ -7,16 +7,16 @@ services:
     depends_on:
       - db
     environment:
-      POSTGRES_URL: "jdbc:postgresql://db:5432/postgres"
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_URL: 
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
     networks:
       - net
   db:
     image: postgres
     environment:
-      POSTGRES_PASSWORD: "postgres"
-      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD:
+      POSTGRES_USER:
     ports:
       - 5432:5432
     networks:
