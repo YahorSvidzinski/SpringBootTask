@@ -5,7 +5,6 @@ metadata:
     io.kompose.service: db
   name: db
 spec:
-  type: LoadBalancer
   ports:
   - name: "5432"
     port: 5432
