@@ -1,13 +1,16 @@
 # TASK3
 
-##You have two options to launch application
+## Use maven wrapper
 
-###First option
-##### Build image 
+Open your project package in cmd
 
 ```
-docker build -t webserviceimage .
+./mvnw.cmd clean package
 ```
+
+## You have two options to launch application
+
+### First option
 
 ##### Run docker compose
 
@@ -27,7 +30,7 @@ http://localhost:8080/actuator/health
 
 There is default name of your database :"postgres"
 ###Second option
-#####You must be familiar with kubernetes(minukube or some cloud solutions) to load configuration
+#####You must be familiar with kubernetes(minukube or some cloud solutions) to load configuration.
 #####I've put all configuration in kubernetes package.So don't be shy and use them as you want.
 
 
