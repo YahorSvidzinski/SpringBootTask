@@ -29,9 +29,9 @@ http://localhost:8080/actuator/health
 
 
 There is default name of your database :"postgres"
-###Second option
-#####You must be familiar with kubernetes(minukube or some cloud solutions) to load configuration.
-#####I've put all configuration in kubernetes package.So don't be shy and use them as you want.
+### Second option
+##### You must be familiar with kubernetes(minukube or some cloud solutions) to load configuration.
+##### I've put all configuration in kubernetes package.So don't be shy and use them as you want.
 
 
 
