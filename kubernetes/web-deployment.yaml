@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: web
+  name: web
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        io.kompose.service: web
+    spec:
+      containers:
+      - env:
+        - name: POSTGRES_PASSWORD
+          value: postgres
+        - name: POSTGRES_URL
+          value: jdbc:postgresql://db:5432/postgres
+        - name: POSTGRES_USER
+          value: postgres
+        image: blackavgn/webserviceimage:1.0.3-stable
+        name: web
+        ports:
+        - containerPort: 8080
+      restartPolicy: Always

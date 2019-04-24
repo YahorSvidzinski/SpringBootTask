@@ -2,7 +2,10 @@ package com.leverx.springapp.demo.repository;
 
 import com.leverx.springapp.demo.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.NoRepositoryBean;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+//Comment to use JPA Repository
+@NoRepositoryBean
+public interface UserRepository extends JpaRepository<User, Long>, CommonUserRepository {
 
 }

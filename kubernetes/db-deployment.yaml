@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: db
+  name: db
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        io.kompose.service: db
+    spec:
+      containers:
+      - env:
+        - name: POSTGRES_PASSWORD
+          value: postgres
+        - name: POSTGRES_USER
+          value: postgres
+        image: postgres
+        name: db
+        ports:
+        - containerPort: 5432
+      restartPolicy: Always

@@ -1,64 +1,67 @@
 package com.leverx.springapp.demo.controller;
 
+import com.leverx.springapp.demo.model.ErrorDetails;
 import com.leverx.springapp.demo.model.User;
-import com.leverx.springapp.demo.repository.UserRepository;
+import com.leverx.springapp.demo.model.UserRequest;
+import com.leverx.springapp.demo.model.UserResponse;
+import com.leverx.springapp.demo.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.util.List;
+import java.util.Collection;
+
+import static javax.servlet.http.HttpServletResponse.*;
 
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
-@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
 public class UserController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @PostMapping
-    @Transactional
     @ApiOperation(value = "Creates new user")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully created user"),
-            @ApiResponse(code = 400, message = "Wrong request,user name length must be between 2 and 40")
+            @ApiResponse(code = SC_CREATED, message = "Successfully created user"),
+            @ApiResponse(code = SC_BAD_REQUEST, message = "Wrong request", response = ErrorDetails.class),
+            @ApiResponse(code = SC_INTERNAL_SERVER_ERROR, message = "Server error")
     })
-    public ResponseEntity<Void> create(@Valid @RequestBody User user) {
-        userRepository.save(user);
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Void> create(@Valid @RequestBody UserRequest userRequest) {
+        User user = userService.create(userRequest);
         var location = ServletUriComponentsBuilder
-                .fromCurrentRequest().path("/{id}")
-                .buildAndExpand(user.getId()).toUri();
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(user.getId())
+                .toUri();
         return ResponseEntity.created(location).build();
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Retrieves user by id from database")
+    @ApiOperation(value = "Retrieves user")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "User was found", response = User.class),
-            @ApiResponse(code = 404, message = "User not found")
+            @ApiResponse(code = SC_OK, message = "User was found", response = UserResponse.class),
+            @ApiResponse(code = SC_NOT_FOUND, message = "User not found"),
+            @ApiResponse(code = SC_INTERNAL_SERVER_ERROR, message = "Server error")
     })
     public ResponseEntity<User> get(@PathVariable("id") Long id) {
-        return ResponseEntity.of(userRepository.findById(id));
+        return ResponseEntity.of(userService.get(id));
     }
 
     @GetMapping
-    @ApiOperation(value = "Retrieves all users from database", response = User.class)
+    @ApiOperation(value = "Retrieves all users", response = UserResponse.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Current list of users"),
+            @ApiResponse(code = SC_OK, message = "Current list of users"),
+            @ApiResponse(code = SC_INTERNAL_SERVER_ERROR, message = "Server error")
     })
-    public ResponseEntity<List<User>> getAll() {
-        return ResponseEntity.ok(userRepository.findAll());
+    public ResponseEntity<Collection<User>> getAll() {
+        return ResponseEntity.ok(userService.getAll());
     }
 }

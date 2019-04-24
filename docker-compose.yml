@@ -1,17 +1,15 @@
 version: '3'
 services:
   web:
-    image: blackavgn/webserviceimage:webservice
+    image:
     ports:
       - 8080:8080
     depends_on:
       - db
     environment:
-      POSTGRES_URL: 
+      POSTGRES_URL:
       POSTGRES_USER:
       POSTGRES_PASSWORD:
-    networks:
-      - net
   db:
     image: postgres
     environment:
@@ -19,5 +17,3 @@ services:
       POSTGRES_USER:
     ports:
       - 5432:5432
-    networks:
-      - net
