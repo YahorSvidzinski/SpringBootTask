@@ -20,7 +20,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     @ExceptionHandler(Error.class)
     public ResponseEntity<ErrorDetails> handleError(Error ex) {
         var errorDetails = new ErrorDetails(ex.getMessage(), SERVER_ERROR);
-        return new ResponseEntity(errorDetails, INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(errorDetails, INTERNAL_SERVER_ERROR);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
             HttpStatus status,
             WebRequest request) {
         var errorDetails = new ErrorDetails(ex.getMessage(), INCORRECT_USER_INFO);
-        return new ResponseEntity(errorDetails, status);
+        return new ResponseEntity<>(errorDetails, status);
     }
 }
 

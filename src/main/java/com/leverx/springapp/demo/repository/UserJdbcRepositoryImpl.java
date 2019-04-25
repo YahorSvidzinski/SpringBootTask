@@ -15,9 +15,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserJdbcRepositoryImpl implements UserJdbcRepository {
 
-    public static final String INSERT_USER = "INSERT INTO users (first_name, second_name) values (?,?)";
-    public static final String GET_USER_BY_ID = "SELECT id, first_name, second_name FROM users WHERE id = ?";
-    public static final String GET_USERS = "SELECT id, first_name, second_name FROM users";
+    private static final String INSERT_USER = "INSERT INTO users (first_name, second_name) values (?,?)";
+    private static final String GET_USER_BY_ID = "SELECT id, first_name, second_name FROM users WHERE id = ?";
+    private static final String GET_USERS = "SELECT id, first_name, second_name FROM users";
 
     private final JdbcTemplate jdbcTemplate;
 
