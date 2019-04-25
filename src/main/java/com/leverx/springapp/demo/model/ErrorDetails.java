@@ -1,16 +1,18 @@
 package com.leverx.springapp.demo.model;
 
-import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
+import com.leverx.springapp.demo.core.ErrorCodes;
 import lombok.Data;
-import org.springframework.http.HttpStatus;
-
 
 @Data
-@AllArgsConstructor
 public class ErrorDetails {
-    @ApiModelProperty(notes = "User names length must be between 2 and 40")
+
     private String message;
-    private HttpStatus httpStatus;
+    private String errorCode;
+
+    public ErrorDetails(String message, ErrorCodes errorCodes) {
+        this.message = message;
+        this.errorCode = errorCodes.getMsg();
+    }
+
 
 }

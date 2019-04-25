@@ -1,25 +1,32 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  labels:
-    io.kompose.service: web
   name: web
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        io.kompose.service: web
+        name: web
     spec:
       containers:
       - env:
         - name: POSTGRES_PASSWORD
-          value: postgres
-        - name: POSTGRES_URL
-          value: jdbc:postgresql://db:5432/postgres
+          valueFrom:
+            secretKeyRef:
+              name: password
+              key: POSTGRES_PASSWORD
         - name: POSTGRES_USER
-          value: postgres
-        image: blackavgn/webserviceimage:1.0.3-stable
+          valueFrom:
+            secretKeyRef:
+              name: user
+              key: POSTGRES_USER
+        - name: POSTGRES_URL
+          valueFrom:
+            configMapKeyRef:
+              name: url
+              key: POSTGRES_URL
+        image: blackavgn/webserviceimage:1.0.3-final
         name: web
         ports:
         - containerPort: 8080

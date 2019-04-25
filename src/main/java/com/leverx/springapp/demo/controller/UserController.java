@@ -9,7 +9,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -18,6 +17,7 @@ import javax.validation.Valid;
 import java.util.Collection;
 
 import static javax.servlet.http.HttpServletResponse.*;
+import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
 @RequestMapping("/users")
@@ -33,9 +33,9 @@ public class UserController {
             @ApiResponse(code = SC_BAD_REQUEST, message = "Wrong request", response = ErrorDetails.class),
             @ApiResponse(code = SC_INTERNAL_SERVER_ERROR, message = "Server error")
     })
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(CREATED)
     public ResponseEntity<Void> create(@Valid @RequestBody UserRequest userRequest) {
-        User user = userService.create(userRequest);
+        var user = userService.create(userRequest);
         var location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")

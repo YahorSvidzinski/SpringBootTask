@@ -1,22 +1,26 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  labels:
-    io.kompose.service: db
   name: db
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        io.kompose.service: db
+        name: db
     spec:
       containers:
       - env:
         - name: POSTGRES_PASSWORD
-          value: postgres
+          valueFrom:
+            secretKeyRef:
+              name: password
+              key: POSTGRES_PASSWORD
         - name: POSTGRES_USER
-          value: postgres
+          valueFrom:
+            secretKeyRef:
+              name: user
+              key: POSTGRES_USER
         image: postgres
         name: db
         ports:

@@ -30,9 +30,23 @@ http://localhost:8080/actuator/health
 
 There is default name of your database :"postgres"
 ### Second option
-##### You must be familiar with kubernetes(minukube or some cloud solutions) to load configuration.
-##### I've put all configuration in kubernetes package.So don't be shy and use them as you want.
+#### Kubernetes config
+##### Before starting deployments you need to set database configuration
 
+##### First set your database user name
+```
+kubectl create secret generic user --from-literal=POSTGRES_USER=[YOUR POSTGRES USER]
+```
+##### Set password
+```
+kubectl create secret generic user --from-literal=POSTGRES_PASSWORD=[YOUR POSTGRES PASSWORD]
+```
+##### Set URL
+```
+kubectl create configmap url --from-literal=POSTGRES_URL=jdbc:postgresql://db:5432/[DATABASE NAME(default:postgres)]
+```
 
-
-
+##### Now you just need to apply your services and deployments
+```
+kubectl apply -f [CONFIGURATION NAME]
+```

@@ -1,5 +1,5 @@
 package com.leverx.springapp.demo.repository;
 
-public interface UserJdbcRepository extends CommonUserRepository {
+public interface UserJdbcRepository extends UserRepository {
 
 }
