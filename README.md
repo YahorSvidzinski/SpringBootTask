@@ -27,19 +27,14 @@ http://localhost:8080/actuator/health
 
 ##### http://localhost:8080/swagger-ui.html
 
-
 There is default name of your database :"postgres"
 ### Second option
 #### Kubernetes config
 ##### Before starting deployments you need to set database configuration
 
-##### First set your database user name
+##### Set your database user name and password
 ```
-kubectl create secret generic user --from-literal=POSTGRES_USER=[YOUR POSTGRES USER]
-```
-##### Set password
-```
-kubectl create secret generic user --from-literal=POSTGRES_PASSWORD=[YOUR POSTGRES PASSWORD]
+kubectl create secret generic user --from-literal=POSTGRES_USER=[YOUR POSTGRES USER] --from-literal=POSTGRES_PASSWORD=[YOUR POSTGRES PASSWORD]
 ```
 ##### Set URL
 ```

@@ -15,17 +15,18 @@ import java.util.Optional;
 @Repository
 @RequiredArgsConstructor
 public class UserJdbcRepositoryImpl implements UserJdbcRepository {
-    private final JdbcTemplate jdbcTemplate;
 
-    public static final String INSERT_INTO_USERS_FIRST_NAME_SECOND_NAME_VALUES = "INSERT INTO users (first_name, second_name) values (?,?)";
-    public static final String SELECT_ID_FIRST_NAME_SECOND_NAME_FROM_USERS_WHERE_ID = "SELECT id, first_name, second_name FROM users WHERE id = ?";
-    public static final String SELECT_ID_FIRST_NAME_SECOND_NAME_FROM_USERS = "SELECT id, first_name, second_name FROM users";
+    public static final String INSERT_USER = "INSERT INTO users (first_name, second_name) values (?,?)";
+    public static final String GET_USER_BY_ID = "SELECT id, first_name, second_name FROM users WHERE id = ?";
+    public static final String GET_USERS = "SELECT id, first_name, second_name FROM users";
+
+    private final JdbcTemplate jdbcTemplate;
 
     @Override
     public User save(User user) {
         var keyHolder = new GeneratedKeyHolder();
         this.jdbcTemplate.update(connection -> {
-            PreparedStatement ps = connection.prepareStatement(INSERT_INTO_USERS_FIRST_NAME_SECOND_NAME_VALUES, new String[]{"id"});
+            PreparedStatement ps = connection.prepareStatement(INSERT_USER, new String[]{"id"});
             ps.setString(1, user.getFirstName());
             ps.setString(2, user.getSecondName());
             return ps;
@@ -37,13 +38,13 @@ public class UserJdbcRepositoryImpl implements UserJdbcRepository {
     @Override
     public Optional<User> findById(Long id) {
         var rowMapper = new BeanPropertyRowMapper<User>(User.class);
-        var user = jdbcTemplate.queryForObject(SELECT_ID_FIRST_NAME_SECOND_NAME_FROM_USERS_WHERE_ID, rowMapper, id);
+        var user = jdbcTemplate.queryForObject(GET_USER_BY_ID, rowMapper, id);
         return Optional.ofNullable(user);
     }
 
     @Override
     public List<User> findAll() {
         var rowMapper = new BeanPropertyRowMapper<User>(User.class);
-        return jdbcTemplate.query(SELECT_ID_FIRST_NAME_SECOND_NAME_FROM_USERS, rowMapper);
+        return jdbcTemplate.query(GET_USERS, rowMapper);
     }
 }

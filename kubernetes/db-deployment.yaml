@@ -14,12 +14,12 @@ spec:
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: password
+              name: postgres-sec
               key: POSTGRES_PASSWORD
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
-              name: user
+              name: postgres-sec
               key: POSTGRES_USER
         image: postgres
         name: db
