@@ -11,8 +11,7 @@ import java.util.Optional;
 public interface UserService {
 
     @NotNull
-    @Valid
-    User create(UserRequest userRequest);
+    User create(@Valid UserRequest userRequest);
 
     Optional<User> get(Long id);
 

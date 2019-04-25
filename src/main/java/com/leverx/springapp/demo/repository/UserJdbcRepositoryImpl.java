@@ -23,7 +23,7 @@ public class UserJdbcRepositoryImpl implements UserJdbcRepository {
 
     @Override
     public User save(User user) {
-        KeyHolder keyHolder = new GeneratedKeyHolder();
+        var keyHolder = new GeneratedKeyHolder();
         this.jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(INSERT_INTO_USERS_FIRST_NAME_SECOND_NAME_VALUES, new String[]{"id"});
             ps.setString(1, user.getFirstName());
