@@ -6,8 +6,8 @@ import lombok.Value;
 @Value
 public class ErrorDetails {
 
-    String message;
-    String errorCode;
+    private String message;
+    private String errorCode;
 
     public ErrorDetails(String message, ErrorCodes errorCodes) {
         this.message = message;

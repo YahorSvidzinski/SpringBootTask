@@ -24,7 +24,7 @@ spec:
         - name: POSTGRES_URL
           valueFrom:
             configMapKeyRef:
-              name: url
+              name: postgres-conf
               key: POSTGRES_URL
         image: blackavgn/webserviceimage:1.0.3-final
         name: web

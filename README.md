@@ -34,11 +34,11 @@ There is default name of your database :"postgres"
 
 ##### Set your database user name and password
 ```
-kubectl create secret generic user --from-literal=POSTGRES_USER=[YOUR POSTGRES USER] --from-literal=POSTGRES_PASSWORD=[YOUR POSTGRES PASSWORD]
+kubectl create secret generic postgres-sec --from-literal=POSTGRES_USER=[YOUR POSTGRES USER] --from-literal=POSTGRES_PASSWORD=[YOUR POSTGRES PASSWORD]
 ```
 ##### Set URL
 ```
-kubectl create configmap url --from-literal=POSTGRES_URL=jdbc:postgresql://db:5432/[DATABASE NAME(default:postgres)]
+kubectl create configmap postgres-conf --from-literal=POSTGRES_URL=jdbc:postgresql://db:5432/[DATABASE NAME(default:postgres)]
 ```
 
 ##### Now you just need to apply your services and deployments
