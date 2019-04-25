@@ -5,30 +5,36 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
-import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "users")
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
-    public static final int MAX_NAME_LENGTH = 40;
-    public static final int MIN_NAME_LENGTH = 2;
+    public static final int MAX_FIRST_NAME_LENGTH = 10;
+    public static final int MIN_FIRST_NAME_LENGTH = 2;
+
+    public static final int MAX_SECOND_NAME_LENGTH = 60;
+    public static final int MIN_SECOND_NAME_LENGTH = 2;
+
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     @NotNull
-    @Size(min = MIN_NAME_LENGTH, max = MAX_NAME_LENGTH)
+    @Size(min = MIN_FIRST_NAME_LENGTH, max = MAX_FIRST_NAME_LENGTH)
     private String firstName;
 
     @NotNull
-    @Size(min = MIN_NAME_LENGTH, max = MAX_NAME_LENGTH)
+    @Size(min = MIN_SECOND_NAME_LENGTH, max = MAX_SECOND_NAME_LENGTH)
     private String secondName;
 }
