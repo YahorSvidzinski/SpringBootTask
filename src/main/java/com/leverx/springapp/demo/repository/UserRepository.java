@@ -1,9 +1,16 @@
 package com.leverx.springapp.demo.repository;
 
-
 import com.leverx.springapp.demo.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+import java.util.Collection;
+import java.util.Optional;
+
+public interface UserRepository {
+
+    User save(User user);
+
+    Optional<User> findById(Long id);
+
+    Collection<User> findAll();
 
 }

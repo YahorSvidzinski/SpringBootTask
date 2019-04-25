@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: web
+  template:
+    metadata:
+      labels:
+        name: web
+    spec:
+      containers:
+      - env:
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-sec
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-sec
+              key: POSTGRES_USER
+        - name: POSTGRES_URL
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-conf
+              key: POSTGRES_URL
+        image: blackavgn/webserviceimage:1.0.3-final
+        name: web
+        ports:
+        - containerPort: 8080
+      restartPolicy: Always
